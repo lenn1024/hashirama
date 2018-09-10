@@ -45,6 +45,6 @@ public class TestController {
 
     @RequestMapping(value = "/test/info")
     private String getTestInfo(){
-        return String.format("test info: %s.", testConfigBean.getDesc());
+        return String.format("test info: %s, random value: %s.", testConfigBean.getDesc(), testConfigBean.getRandomValue());
     }
 }

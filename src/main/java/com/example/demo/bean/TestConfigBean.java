@@ -6,13 +6,18 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ConfigurationProperties(prefix = "test")
-@PropertySource("classpath:test.properties")
+/**
+ * encoding设置很重要，不然乱码
+ */
+@PropertySource(value = "classpath:test.properties", encoding = "UTF-8")
 public class TestConfigBean {
     private String name;
 
     private String url;
 
     private String desc;
+
+    private String randomValue;
 
     public TestConfigBean() {
     }
@@ -39,5 +44,13 @@ public class TestConfigBean {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getRandomValue() {
+        return randomValue;
+    }
+
+    public void setRandomValue(String randomValue) {
+        this.randomValue = randomValue;
     }
 }
