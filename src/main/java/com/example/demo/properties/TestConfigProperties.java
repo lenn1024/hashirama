@@ -1,4 +1,4 @@
-package com.example.demo.bean;
+package com.example.demo.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
  * encoding设置很重要，不然乱码
  */
 @PropertySource(value = "classpath:test.properties", encoding = "UTF-8")
-public class TestConfigBean {
+public class TestConfigProperties {
     private String name;
 
     private String url;
@@ -19,7 +19,7 @@ public class TestConfigBean {
 
     private String randomValue;
 
-    public TestConfigBean() {
+    public TestConfigProperties() {
     }
 
     public String getName() {

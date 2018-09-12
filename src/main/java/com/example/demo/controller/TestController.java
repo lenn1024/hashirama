@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.bean.ConfigBean;
-import com.example.demo.bean.TestConfigBean;
+import com.example.demo.properties.AppConfigProperties;
+import com.example.demo.properties.TestConfigProperties;
+import com.example.demo.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,13 @@ public class TestController {
     private String name;
 
     @Autowired
-    private ConfigBean configBean;
+    private AppConfigProperties appConfigProperties;
 
     @Autowired
-    private TestConfigBean testConfigBean;
+    private TestConfigProperties testConfigProperties;
+
+    @Autowired
+    private User user;
 
     @RequestMapping("/")
     private String index(){
@@ -40,11 +44,27 @@ public class TestController {
 
     @RequestMapping("/author/info")
     private String getAuthorInfo(){
-        return String.format("author name: %s, age: %d.", configBean.getName(), configBean.getAge());
+        return String.format("author name: %s, age: %d.", appConfigProperties.getName(), appConfigProperties.getAge());
     }
 
     @RequestMapping(value = "/test/info")
     private String getTestInfo(){
-        return String.format("test info: %s, random value: %s.", testConfigBean.getDesc(), testConfigBean.getRandomValue());
+        return String.format("test info: %s, random value: %s.", testConfigProperties.getDesc(), testConfigProperties.getRandomValue());
     }
+
+    @RequestMapping("/user")
+    private User getUser(){
+        User user = new User();
+        user.setName("lenn");
+        user.setAge(12);
+        user.setFamale(false);
+
+        return user;
+    }
+
+    @RequestMapping("/config/user")
+    private User User(){
+        return this.user;
+    }
+
 }

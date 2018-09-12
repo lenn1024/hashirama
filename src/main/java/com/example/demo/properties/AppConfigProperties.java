@@ -1,13 +1,13 @@
-package com.example.demo.bean;
+package com.example.demo.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "project.author")
-public class ConfigBean {
+public class AppConfigProperties {
     private String name;
     private int age;
 
-    public ConfigBean() {
+    public AppConfigProperties() {
     }
 
     public String getName() {
