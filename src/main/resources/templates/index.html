@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>spring boot demo</title>
@@ -7,5 +7,15 @@
 </head>
 <body>
 <h1>Hello Spring boot</h1>
+<a th:href="@{http://www.jd.com}">京东商城</a>
+
+<table>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.name}">name</td>
+        <td th:text="${user.age}">age</td>
+        <td th:text="${user.famale}">female</td>
+    </tr>
+</table>
+
 </body>
 </html>

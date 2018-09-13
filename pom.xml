@@ -48,6 +48,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+        <!-- webjars vue-->
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>vue</artifactId>
+            <version>1.0.21</version>
+        </dependency>
     </dependencies>
 
     <build>
