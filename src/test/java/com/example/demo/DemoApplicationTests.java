@@ -4,6 +4,8 @@ import com.example.demo.controller.TestController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -13,6 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Map;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -20,6 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
+
+    private Logger logger = LoggerFactory.getLogger(DemoApplicationTests.class);
 
     private MockMvc mockMvc;
 
@@ -42,7 +48,26 @@ public class DemoApplicationTests {
 
     @Test
     public void testRedis(){
+        // key-value
         stringRedisTemplate.opsForValue().set("name", "waw");
+        String value = stringRedisTemplate.opsForValue().get("name");
+        logger.info("key-value: {}", value);
+
+        // list
+        stringRedisTemplate.opsForList().leftPushAll("list", "1", "2", "3");
+
+        // set
+        stringRedisTemplate.opsForSet().add("set", "apple", "apple", "banana");
+
+        // zset
+        stringRedisTemplate.opsForZSet().add("zset", "apple", 1);
+        stringRedisTemplate.opsForZSet().add("zset", "orange", 2);
+
+        // hash
+        stringRedisTemplate.opsForHash().put("hash", "name", "lenn");
+        stringRedisTemplate.opsForHash().put("hash", "age", "18");
+        Map<Object, Object> map = stringRedisTemplate.opsForHash().entries("hash");
+        logger.info("map: {}", map);
     }
 
 }
