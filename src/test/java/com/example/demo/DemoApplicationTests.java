@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import com.example.demo.controller.TestController;
+import com.example.demo.entity.PopFreightVender;
+import com.example.demo.mapper.PopFreightVenderMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -31,6 +34,9 @@ public class DemoApplicationTests {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    private PopFreightVenderMapper popFreightVenderMapper;
 
     @Before
     public void init(){
@@ -68,6 +74,12 @@ public class DemoApplicationTests {
         stringRedisTemplate.opsForHash().put("hash", "age", "18");
         Map<Object, Object> map = stringRedisTemplate.opsForHash().entries("hash");
         logger.info("map: {}", map);
+    }
+
+    @Test
+    public void testMybatis(){
+        List<PopFreightVender> venders = popFreightVenderMapper.getAll();
+        System.out.println(venders);
     }
 
 }
