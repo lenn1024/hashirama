@@ -1,8 +1,8 @@
 package com.example.demo;
 
 import com.example.demo.controller.TestController;
-import com.example.demo.entity.PopFreightVender;
-import com.example.demo.mapper.PopFreightVenderMapper;
+import com.example.demo.entity.UserInfo;
+import com.example.demo.mapper.UserMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class DemoApplicationTests {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private PopFreightVenderMapper popFreightVenderMapper;
+    private UserMapper userMapper;
 
     @Before
     public void init(){
@@ -78,8 +79,18 @@ public class DemoApplicationTests {
 
     @Test
     public void testMybatis(){
-        List<PopFreightVender> venders = popFreightVenderMapper.getAll();
-        System.out.println(venders);
+        List<UserInfo> users = userMapper.getAllUser();
+        System.out.println(users);
     }
 
+    @Test
+    public void mybatisInsert(){
+        UserInfo user = new UserInfo();
+        user.setName("maer");
+        user.setAge(10);
+        user.setCreateTime(new Date());
+        userMapper.insertUser(user);
+
+        System.out.println("bang");
+    }
 }
