@@ -3,6 +3,8 @@ package com.example.demo;
 import com.example.demo.controller.TestController;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.mapper.UserMapper;
+import com.example.demo.rabbitmq.direct.HelloSender;
+import com.example.demo.rabbitmq.topic.TopicSender;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +40,12 @@ public class DemoApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private HelloSender helloSender;
+
+    @Autowired
+    private TopicSender topicSender;
 
     @Before
     public void init(){
@@ -93,4 +101,30 @@ public class DemoApplicationTests {
 
         System.out.println("bang");
     }
+
+    @Test
+    public void sendRabbitMQTest() throws InterruptedException {
+        logger.info("Start: send msg to direct exchange.");
+        for (int i = 0; i < 100; i++){
+            helloSender.send();
+            Thread.sleep(1000);
+        }
+        logger.info("End: send msg to direct exchange.");
+    }
+
+    @Test
+    public void receiveRabbitMQ() throws InterruptedException {
+        Thread.sleep(10000);
+    }
+
+    @Test
+    public void sendTopicRabbitMQTest() throws InterruptedException {
+        logger.info("Start: send msg to topic exchange.");
+        for (int i = 0; i < 100; i++){
+            topicSender.send();
+            Thread.sleep(100);
+        }
+        logger.info("End: send msg to topic exchange.");
+    }
+
 }
