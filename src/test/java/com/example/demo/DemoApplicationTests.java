@@ -4,6 +4,7 @@ import com.example.demo.controller.TestController;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.rabbitmq.direct.HelloSender;
+import com.example.demo.rabbitmq.fanout.FanoutSender;
 import com.example.demo.rabbitmq.topic.TopicSender;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +47,9 @@ public class DemoApplicationTests {
 
     @Autowired
     private TopicSender topicSender;
+
+    @Autowired
+    private FanoutSender fanoutSender;
 
     @Before
     public void init(){
@@ -125,6 +129,17 @@ public class DemoApplicationTests {
             Thread.sleep(100);
         }
         logger.info("End: send msg to topic exchange.");
+    }
+
+
+    @Test
+    public void sendFanoutRabbitMQTest() throws InterruptedException {
+        logger.info("Start: send msg to fanout exchange.");
+        for (int i = 0; i < 100; i++){
+            fanoutSender.send();
+            Thread.sleep(100);
+        }
+        logger.info("End: send msg to fanout exchange.");
     }
 
 }
