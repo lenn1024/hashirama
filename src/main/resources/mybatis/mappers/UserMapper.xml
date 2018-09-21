@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.mapper.UserMapper">
+<mapper namespace="com.hashirama.demo.mapper.UserMapper">
 
     <sql id="insertUserSql">
         INSERT INTO user_info(
@@ -15,7 +15,7 @@
     <!-- 使用useGeneratedKeys和keyProperty属性让数据库生成auto_increment列的值，
          并将生成的值设置到其中一个输入对象属性内
      -->
-    <insert id="addUser" parameterType="com.example.demo.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addUser" parameterType="com.hashirama.demo.entity.UserInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_info(
           name,
           age,
@@ -28,7 +28,7 @@
         使用<selectKey>子元素来生成主键值，并将值保存到UserInfo对象的id属性上。
         属性order=“AFTER”表示MyBatis将取得序列的下一个值作为主键值，并且在执行INSERT语句之前将值设置到id属性上。
     -->
-    <insert id="insertUser" parameterType="com.example.demo.entity.UserInfo">
+    <insert id="insertUser" parameterType="com.hashirama.demo.entity.UserInfo">
         <selectKey keyProperty="id" resultType="long" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -36,7 +36,7 @@
     </insert>
 
     <!-- get all users-->
-    <select id="getAllUser" resultType="com.example.demo.entity.UserInfo">
+    <select id="getAllUser" resultType="com.hashirama.demo.entity.UserInfo">
         SELECT * FROM user_info
     </select>
 
