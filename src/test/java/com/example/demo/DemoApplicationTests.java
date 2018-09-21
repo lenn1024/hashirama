@@ -118,7 +118,7 @@ public class DemoApplicationTests {
 
     @Test
     public void receiveRabbitMQ() throws InterruptedException {
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
     }
 
     @Test
