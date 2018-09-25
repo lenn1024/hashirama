@@ -2,6 +2,7 @@ package com.hashirama.demo;
 
 import com.hashirama.demo.controller.TestController;
 import com.hashirama.demo.entity.UserInfo;
+import com.hashirama.demo.mail.MailService;
 import com.hashirama.demo.mapper.UserMapper;
 import com.hashirama.demo.rabbitmq.direct.HelloSender;
 import com.hashirama.demo.rabbitmq.fanout.FanoutSender;
@@ -50,6 +51,9 @@ public class DemoApplicationTests {
 
     @Autowired
     private FanoutSender fanoutSender;
+
+    @Autowired
+    private MailService mailService;
 
     @Before
     public void init(){
@@ -142,4 +146,8 @@ public class DemoApplicationTests {
         logger.info("End: send msg to fanout exchange.");
     }
 
+    @Test
+    public void sendMail(){
+        mailService.sendSimpleMail("lenn1024@163.com", "test mail", "Hello gsm.");
+    }
 }

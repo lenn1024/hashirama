@@ -20,7 +20,7 @@ public class PageController {
         users.add(new User("waw", 11, true));
 
         mv.addObject("users", users);
-        mv.setViewName("/index");
+        mv.setViewName("index");
 
         return mv;
     }
